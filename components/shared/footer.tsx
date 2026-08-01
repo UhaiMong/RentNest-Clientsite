@@ -1,4 +1,6 @@
 import { Heart, Home, ShieldCheck, Zap } from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
 
 export function PublicFooter() {
   return (
@@ -7,14 +9,20 @@ export function PublicFooter() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* Brand Col */}
           <div className="space-y-3">
-            <div className="flex items-center gap-2">
-              <div className="w-8 h-8 rounded-lg bg-emerald-600 flex items-center justify-center text-white font-bold">
-                <Home className="w-4 h-4" />
+            <Link href="/" className="flex items-center gap-2">
+              <div className="w-24 h-24 rounded-lg bg-emerald-600 flex items-center justify-center text-white font-bold">
+                <Image
+                  src="/rentnest.png"
+                  alt="RentNest logo"
+                  className="object-cover object-center"
+                  width={90}
+                  height={90}
+                />
               </div>
               <span className="text-lg font-bold text-white tracking-tight">
                 RentNest
               </span>
-            </div>
+            </Link>
             <p className="text-xs leading-relaxed text-slate-400">
               Modern rental property marketplace API with instant direct
               bookings, verified landlords, and tenant authorization.
@@ -89,8 +97,12 @@ export function PublicFooter() {
               <p className="text-emerald-400 font-bold">
                 Status: Online 200 OK
               </p>
-              <p className="text-slate-500">Host: http://localhost:3000</p>
-              <p className="text-slate-500">Base Path: /api/v1</p>
+              <p className="text-slate-500">
+                Localhost: http://localhost:5000/api
+              </p>
+              <p className="text-slate-500">
+                Production: https://rentnest-backend-api-blond.vercel.app/api
+              </p>
             </div>
           </div>
         </div>
