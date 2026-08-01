@@ -1,31 +1,40 @@
-const API_BASE = process.env.NEXT_PUBLIC_API_URL;
+"use server";
 
-if (!API_BASE) {
-  throw new Error("NEXT_PUBLIC_API_URL is not defined");
-}
+import { getAccessToken } from "@/lib/session";
+import { refreshTokenAction } from "@/app/(auth)/_actions/authActions";
 
-export async function apiRequest<T>(
-  endpoint: string,
-  options: RequestInit = {},
+const API_URL = process.env.BACKEND_API_URL;
+
+export async function apiFetch<T>(
+  path: string,
+  options: RequestInit & { body?: unknown } = {},
 ): Promise<T> {
-  const response = await fetch(`${API_BASE}${endpoint}`, {
-    headers: {
-      "Content-Type": "application/json",
-      ...options.headers,
-    },
-    credentials: "include",
-    ...options,
-  });
+  let token = await getAccessToken();
 
-  const data = await response.json().catch(() => null);
+  const doFetch = (accessToken: string | null) =>
+    fetch(`${API_URL}/api${path}`, {
+      ...options,
+      headers: {
+        "Content-Type": "application/json",
+        ...(accessToken ? { Authorization: `Bearer ${accessToken}` } : {}),
+        ...options.headers,
+      },
+      body:
+        options.body !== undefined ? JSON.stringify(options.body) : undefined,
+      cache: "no-store",
+    });
 
-  if (!response.ok) {
-    throw new Error(
-      data?.message ??
-        data?.error ??
-        `Request failed with status ${response.status}`,
-    );
+  let res = await doFetch(token);
+
+  // token expired -> refresh once, retry once
+  if (res.status === 401) {
+    token = await refreshTokenAction();
+    if (token) res = await doFetch(token);
   }
 
-  return data as T;
+  const result = await res.json();
+  if (!res.ok || result.success === false) {
+    throw new Error(result.message ?? `Request failed (${res.status})`);
+  }
+  return result;
 }

@@ -125,10 +125,8 @@ export function PublicNavbar() {
             </DropdownMenu>
             {/* Mobile menu  */}
             <Sheet open={open} onOpenChange={setOpen}>
-              <SheetTrigger className="lg:hidden">
-                <Button
-                  variant="ghost"
-                  size="icon"
+              <SheetTrigger className="md:hidden">
+                <button
                   className={cn(
                     "transition-colors duration-200",
                     "text-brand bg-white",
@@ -140,7 +138,7 @@ export function PublicNavbar() {
                   ) : (
                     <Menu className="w-5 h-5" />
                   )}
-                </Button>
+                </button>
               </SheetTrigger>
 
               <SheetContent side="right" className="w-72 pt-6">
