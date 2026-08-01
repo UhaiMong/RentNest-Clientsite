@@ -10,10 +10,14 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { useState } from "react";
+import { cn } from "@/lib/utils";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 const navItems = [
-  { label: "Home", href: "/", tab: "browse" as const },
-  { label: "Properties", href: "/properties", tab: "browse" as const },
-  { label: "About", href: "/about", tab: "browse" as const },
+  { label: "Home", href: "/" },
+  { label: "Properties", href: "/properties" },
+  { label: "About", href: "/about" },
+  { label: "Register", href: "/register" },
 ];
 
 const userMenuItems = [
@@ -21,7 +25,7 @@ const userMenuItems = [
 ];
 
 export function PublicNavbar() {
-  const [activeTab, setActiveTab] = useState("");
+  const pathname = usePathname();
   return (
     <nav className="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-slate-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -35,21 +39,21 @@ export function PublicNavbar() {
 
           {/* Centered Nav Links */}
           <div className="hidden md:absolute md:left-1/2 md:transform md:-translate-x-1/2 md:flex md:items-center md:gap-8">
-            {navItems.map((item) => (
-              <button
-                key={item.label}
-                onClick={() => {
-                  if (setActiveTab) setActiveTab(item.tab);
-                }}
-                className={`text-sm font-medium transition-colors cursor-pointer ${
-                  activeTab === item.tab
-                    ? "text-emerald-600 font-bold"
-                    : "text-slate-600 hover:text-emerald-600"
-                }`}
-              >
-                {item.label}
-              </button>
-            ))}
+            {navItems.map((item) => {
+              const isActive = pathname === item.href;
+              return (
+                <Link
+                  key={item.label}
+                  href={item.href}
+                  className={cn(
+                    "text-sm font-medium transition-colors cursor-pointer",
+                    isActive ? "bg-emerald-600 text-white rounded-xl px-1" : "",
+                  )}
+                >
+                  {item.label}
+                </Link>
+              );
+            })}
           </div>
 
           {/* User Dropdown / Auth */}
