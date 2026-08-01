@@ -1,3 +1,5 @@
+import { PublicFooter } from "@/components/shared/footer";
+import { PublicNavbar } from "@/components/shared/navbar";
 import React from "react";
 
 export default async function PublicHome({
@@ -6,10 +8,12 @@ export default async function PublicHome({
   children: React.ReactNode;
 }) {
   return (
-    <div className="h-screen">
-      {" "}
-      <h1>Navbar is here</h1> {children}
-      <h1>Footer is here</h1>
-    </div>
+    <>
+      <PublicNavbar />{" "}
+      <main className="h-screen w-full overflow-y-auto overflow-x-hidden">
+        {children}
+      </main>
+      <PublicFooter />
+    </>
   );
 }
