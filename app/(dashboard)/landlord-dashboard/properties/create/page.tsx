@@ -1,5 +1,5 @@
 import { getCategories } from "@/app/services/property-action";
-import PropertyForm from "./_component/PropertyForm";
+import PropertyForm from "./_components/PropertyForm";
 import {
   Card,
   CardContent,
@@ -7,7 +7,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import PropertyMotionWrapper from "./_component/PropertyMotionWrapper";
+import PropertyMotionWrapper from "./_components/PropertyMotionWrapper";
 
 export default async function CreatePropertyPage() {
   const categories = await getCategories();

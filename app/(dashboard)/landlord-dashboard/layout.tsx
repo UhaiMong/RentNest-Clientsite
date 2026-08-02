@@ -14,7 +14,7 @@ export default function LandlordDashboardLayout({
 }) {
   return (
     <div className="flex w-full gap-8 py-8">
-      <aside className="w-40 shrink-0 shadow-2xl h-full border-r-2 border-emerald-600">
+      <aside className="w-40 shrink-0 shadow-2xl h-full border-r-2 border-emerald-600 sticky top-0">
         <div>
           <h2 className="text-md font-black text-emerald-600 pl-2.5">
             RentNest -LANDLORD
