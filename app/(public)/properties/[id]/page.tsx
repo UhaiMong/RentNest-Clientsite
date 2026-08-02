@@ -4,6 +4,7 @@ import { MapPin } from "lucide-react";
 import { getPropertyById } from "@/app/services/property-action";
 import { getMeAction } from "@/app/(auth)/_actions/authActions";
 import RequestToRentForm from "./_component/RequestToRentForm";
+import PropertyReviews from "./_component/PropertyReviews";
 
 export default async function PropertyDetailPage({
   params,
@@ -53,6 +54,8 @@ export default async function PropertyDetailPage({
       {user?.role === "TENANT" && property.isAvailable && (
         <RequestToRentForm propertyId={property.id} />
       )}
+
+      <PropertyReviews propertyId={property.id} />
     </div>
   );
 }
