@@ -1,5 +1,7 @@
+import { getMyPayments } from "../_actions/paymentActions";
+
 export default async function TenantPaymentsPage() {
-  const payments = ["Payment"];
+  const payments = await getMyPayments();
 
   return (
     <div>
