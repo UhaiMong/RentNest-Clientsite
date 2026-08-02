@@ -59,8 +59,7 @@ export interface Rental {
   tenant?: Pick<User, "id" | "name" | "email">;
   tenantId?: string;
   status: RentalStatus;
-  startDate: string;
-  endDate?: string;
+  moveInDate: string;
   createdAt: string;
 }
 
