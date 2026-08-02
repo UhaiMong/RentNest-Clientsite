@@ -2,6 +2,8 @@ import Image from "next/image";
 
 import { MapPin } from "lucide-react";
 import { getPropertyById } from "@/app/services/property-action";
+import { getMeAction } from "@/app/(auth)/_actions/authActions";
+import RequestToRentForm from "./_component/RequestToRentForm";
 
 export default async function PropertyDetailPage({
   params,
@@ -10,6 +12,7 @@ export default async function PropertyDetailPage({
 }) {
   const { id } = await params;
   const property = await getPropertyById(id);
+  const user = await getMeAction();
 
   return (
     <div className="mx-auto max-w-4xl px-4 py-8">
@@ -46,6 +49,9 @@ export default async function PropertyDetailPage({
             ))}
           </div>
         </div>
+      )}
+      {user?.role === "TENANT" && property.isAvailable && (
+        <RequestToRentForm propertyId={property.id} />
       )}
     </div>
   );

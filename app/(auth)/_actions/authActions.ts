@@ -144,3 +144,22 @@ export async function refreshTokenAction() {
   );
   return result.data.accessToken as string;
 }
+
+// get me action
+export async function getMeAction() {
+  const cookieStore = await cookies();
+  const accessToken = cookieStore.get("accessToken")?.value;
+  if (!accessToken) return null;
+  const res = await fetch(`${API_URL}/auth/me`, {
+    method: "GET",
+    headers: {
+      Cookie: `accessToken=${accessToken}`,
+    },
+  });
+  if (!res.ok) return null;
+
+  const result = await res.json();
+
+  if (!result.success) return null;
+  return result.data.user ?? null;
+}
