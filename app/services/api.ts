@@ -23,7 +23,11 @@ export async function apiFetch<T>(
         ...options.headers,
       },
       body:
-        options.body !== undefined ? JSON.stringify(options.body) : undefined,
+        typeof options.body === "string"
+          ? options.body
+          : options.body !== undefined
+            ? JSON.stringify(options.body)
+            : undefined,
       cache: "no-store",
     });
 

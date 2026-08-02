@@ -1,0 +1,38 @@
+import Link from "next/link";
+
+const links = [
+  { href: "/landlord-dashboard", label: "Overview" },
+  { href: "/landlord-dashboard/properties", label: "My Properties" },
+  { href: "/landlord-dashboard/properties/create", label: "Add Property" },
+  { href: "/landlord-dashboard/requests", label: "Rental Requests" },
+];
+
+export default function LandlordDashboardLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  return (
+    <div className="flex w-full gap-8 py-8">
+      <aside className="w-40 shrink-0 shadow-2xl h-full border-r-2 border-emerald-600">
+        <div>
+          <h2 className="text-md font-black text-emerald-600 pl-2.5">
+            RentNest -LANDLORD
+          </h2>
+        </div>
+        <nav className="flex flex-col gap-1">
+          {links.map((l) => (
+            <Link
+              key={l.href}
+              href={l.href}
+              className="rounded-md px-3 py-2 text-sm font-medium hover:bg-muted"
+            >
+              {l.label}
+            </Link>
+          ))}
+        </nav>
+      </aside>
+      <main className="flex-1 px-4">{children}</main>
+    </div>
+  );
+}
