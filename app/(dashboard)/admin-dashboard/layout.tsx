@@ -5,6 +5,7 @@ const links = [
   { href: "/admin-dashboard/users", label: "Users" },
   { href: "/admin-dashboard/properties", label: "Properties" },
   { href: "/admin-dashboard/rentals", label: "Rentals" },
+  { href: "/admin-dashboard/categories", label: "Categories" },
 ];
 
 export default function AdminDashboardLayout({

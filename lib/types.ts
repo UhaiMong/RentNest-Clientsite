@@ -20,10 +20,42 @@ export interface User {
   updatedAt?: string;
 }
 
+export type PropertyType =
+  | "APARTMENT"
+  | "HOUSE"
+  | "STUDIO"
+  | "SHOP"
+  | "SUPER_SHOP"
+  | "OFFICE"
+  | "OTHER";
+
+export type UsageType =
+  | "RESIDENTIAL"
+  | "NON_RESIDENTIAL"
+  | "COMMERCIAL"
+  | "OTHER";
+
+export const PROPERTY_TYPES = [
+  "APARTMENT",
+  "HOUSE",
+  "STUDIO",
+  "SHOP",
+  "SUPER_SHOP",
+  "OFFICE",
+  "OTHER",
+] as const;
+export const USAGE_TYPES = [
+  "RESIDENTIAL",
+  "NON_RESIDENTIAL",
+  "COMMERCIAL",
+  "OTHER",
+] as const;
+
 export interface Category {
   id: string;
-  propertyType: string;
-  usageType: string;
+  propertyType: PropertyType;
+  usageType: UsageType;
+  createdAt?: string;
 }
 
 export interface Property {
@@ -96,10 +128,12 @@ export interface Paginated<T> {
 }
 
 export interface AdminStats {
-  totalUsers: number;
-  totalProperties: number;
-  totalRentals: number;
-  totalRevenue: number;
+  total_user: number;
+  total_active_user: number;
+  total_property: number;
+  total_rental: number;
+  total_review: number;
+  total_revenue: number;
   [key: string]: number;
 }
 
