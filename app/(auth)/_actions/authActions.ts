@@ -27,13 +27,13 @@ async function storeTokens(accessToken: string, refreshToken: string) {
   const cookieStore = await cookies();
   cookieStore.set("accessToken", accessToken, {
     httpOnly: true,
-    maxAge: 60 * 60 * 24,
+    maxAge: 60 * 60 * 24 * 7 * 1000,
     sameSite: "lax",
     path: "/",
   });
   cookieStore.set("refreshToken", refreshToken, {
     httpOnly: true,
-    maxAge: 60 * 60 * 24 * 7,
+    maxAge: 60 * 60 * 24 * 30 * 1000,
     sameSite: "lax",
     path: "/",
   });

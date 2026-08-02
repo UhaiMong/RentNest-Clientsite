@@ -3,7 +3,7 @@
 import { getAccessToken } from "@/lib/session";
 import { refreshTokenAction } from "@/app/(auth)/_actions/authActions";
 
-const API_URL = process.env.BACKEND_API_URL;
+const API_URL = process.env.NEXT_PUBLIC_API_URL?.replace(/\/+$/, "");
 
 export async function apiFetch<T>(
   path: string,
@@ -11,8 +11,11 @@ export async function apiFetch<T>(
 ): Promise<T> {
   let token = await getAccessToken();
 
+  // Normalize path to ensure no leading slash duplicate
+  const cleanPath = path.startsWith("/") ? path.slice(1) : path;
+
   const doFetch = (accessToken: string | null) =>
-    fetch(`${API_URL}/api${path}`, {
+    fetch(`${API_URL}/${cleanPath}`, {
       ...options,
       headers: {
         "Content-Type": "application/json",
