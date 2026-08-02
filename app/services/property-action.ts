@@ -1,6 +1,6 @@
 "use server";
 
-import { Property } from "@/lib/types";
+import { Category, Property } from "@/lib/types";
 import { apiFetch } from "./api";
 
 export async function getProperties(
@@ -21,5 +21,19 @@ export async function getProperties(
     method: "GET",
   });
 
+  return result.data;
+}
+
+export async function getPropertyById(id: string) {
+  const result = await apiFetch<{ data: Property }>(`properties/${id}`, {
+    method: "GET",
+  });
+  return result.data;
+}
+
+export async function getCategories() {
+  const result = await apiFetch<{ data: Category[] }>(`/categories/list`, {
+    method: "GET",
+  });
   return result.data;
 }
