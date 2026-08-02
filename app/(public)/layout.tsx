@@ -1,6 +1,6 @@
 import { PublicFooter } from "@/components/shared/footer";
-import { PublicNavbar } from "@/components/shared/navbar";
 import React from "react";
+import Navbar from "./_components/Navbar";
 
 export default async function PublicHome({
   children,
@@ -9,7 +9,7 @@ export default async function PublicHome({
 }) {
   return (
     <>
-      <PublicNavbar />{" "}
+      <Navbar />{" "}
       <main className="h-screen w-full overflow-y-auto overflow-x-hidden">
         {children}
       </main>

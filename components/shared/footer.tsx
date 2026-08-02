@@ -15,6 +15,7 @@ export function PublicFooter() {
                   src="/rentnest.png"
                   alt="RentNest logo"
                   className="object-cover object-center"
+                  loading="eager"
                   width={90}
                   height={90}
                 />

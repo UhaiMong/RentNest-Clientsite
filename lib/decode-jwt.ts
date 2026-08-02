@@ -1,5 +1,6 @@
 export type TokenPayload = {
   id: string;
+  name: string;
   email: string;
   role: "TENANT" | "LANDLORD" | "ADMIN";
   [key: string]: unknown;
