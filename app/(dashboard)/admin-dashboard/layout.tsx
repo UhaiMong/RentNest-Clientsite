@@ -1,4 +1,5 @@
 import Link from "next/link";
+import LogoutDashboard from "../_components/Sidebar";
 
 const links = [
   { href: "/admin-dashboard", label: "Overview" },
@@ -32,6 +33,8 @@ export default function AdminDashboardLayout({
             </Link>
           ))}
         </nav>
+        <hr />
+        <LogoutDashboard />
       </aside>
       <main className="flex-1 px-4">{children}</main>
     </div>

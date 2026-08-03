@@ -120,7 +120,7 @@ export async function logoutAction() {
   cookieStore.delete("accessToken");
   cookieStore.delete("refreshToken");
 
-  redirect("/login");
+  redirect("/");
 }
 
 // Refresh token

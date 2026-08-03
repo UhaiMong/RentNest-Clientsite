@@ -1,20 +1,45 @@
 "use server";
 
-import { revalidatePath } from "next/cache";
-import type { Payment } from "@/lib/types";
 import { apiFetch } from "@/app/services/api";
+// import { apiFetch } from "@/services/api";
+import type { Payment } from "@/lib/types";
 
-export async function payForRentalAction(rentalId: string) {
-  await apiFetch("/payments/create", {
-    method: "POST",
-    body: JSON.stringify({ rentalId }),
-  });
-  revalidatePath("/tenant-dashboard/payments");
-  revalidatePath("/tenant-dashboard/rentals");
+type PayState = { success: boolean; message: string; url?: string } | null;
+
+export async function payForRentalAction(
+  rentalRequestId: string,
+  prevState: PayState,
+): Promise<PayState> {
+  try {
+    const result = await apiFetch<{ data: { checkOutUrl: string } }>(
+      "/payments/create",
+      {
+        method: "POST",
+        body: JSON.stringify({ rentalRequestId }),
+      },
+    );
+    return {
+      success: true,
+      message: "Redirecting to payment...",
+      url: result.data.checkOutUrl,
+    };
+  } catch (err) {
+    return {
+      success: false,
+      message: err instanceof Error ? err.message : "Failed to start payment",
+    };
+  }
 }
 
 export async function getMyPayments() {
   const result = await apiFetch<{ data: Payment[] }>("/payments", {
+    method: "GET",
+  });
+  return result.data;
+}
+
+export async function getPaymentById(id: string) {
+  const result = await apiFetch<{ data: Payment }>(`/payments/${id}`, {
     method: "GET",
   });
   return result.data;

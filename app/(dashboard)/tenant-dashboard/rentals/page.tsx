@@ -1,6 +1,5 @@
-import { payForRentalAction } from "../_actions/paymentActions";
 import { getMyRentals } from "../_actions/rentalActions";
-import { Button } from "@/components/ui/button";
+import PayButton from "./_component/PayButton";
 
 export default async function TenantRentalsPage() {
   const rentals = await getMyRentals();
@@ -26,18 +25,9 @@ export default async function TenantRentalsPage() {
               </p>
 
               {r.status === "APPROVED" && (
-                <form
-                  action={payForRentalAction.bind(null, r.id)}
-                  className="mt-3"
-                >
-                  <Button
-                    className="text-md font-semibold bg-emerald-500 text-white hover:bg-emerald-700 cursor-pointer"
-                    type="submit"
-                    size="sm"
-                  >
-                    Pay Now
-                  </Button>
-                </form>
+                <div className="mt-3">
+                  <PayButton rentalRequestId={r.id} />
+                </div>
               )}
             </div>
           ))}

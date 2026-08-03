@@ -77,6 +77,8 @@ export interface Property {
   updatedAt?: string;
 }
 
+export type PaymentStatus = "PENDING" | "COMPLETED" | "FAILED";
+
 export type RentalStatus =
   | "PENDING"
   | "APPROVED"
@@ -95,11 +97,9 @@ export interface Rental {
   createdAt: string;
 }
 
-export type PaymentStatus = "PENDING" | "PAID" | "FAILED" | "REFUNDED";
-
 export interface Payment {
   id: string;
-  rental: Rental;
+  rentalRequest: Rental;
   rentalId: string;
   amount: number;
   status: PaymentStatus;

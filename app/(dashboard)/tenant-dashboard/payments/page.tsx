@@ -2,6 +2,7 @@ import { getMyPayments } from "../_actions/paymentActions";
 
 export default async function TenantPaymentsPage() {
   const payments = await getMyPayments();
+  console.log(payments);
 
   return (
     <div>
@@ -13,12 +14,25 @@ export default async function TenantPaymentsPage() {
         <div className="space-y-4">
           {payments?.map((p) => (
             <div key={p.id} className="rounded-lg border p-4">
-              <p className="font-semibold">{p.rental.property.title}</p>
+              <p className="font-semibold">
+                {p.rentalRequest?.property?.title}
+              </p>
               <p className="text-sm text-muted-foreground">
                 Amount: ${p.amount}
               </p>
               <p className="mt-1 text-sm">
-                Status: <span className="font-medium">{p.status}</span>
+                Status:{" "}
+                <span
+                  className={
+                    p.status === "COMPLETED"
+                      ? "font-medium text-green-600"
+                      : p.status === "FAILED"
+                        ? "font-medium text-red-600"
+                        : "font-medium text-yellow-600"
+                  }
+                >
+                  {p.status}
+                </span>
               </p>
               {p.transactionId && (
                 <p className="text-xs text-muted-foreground">

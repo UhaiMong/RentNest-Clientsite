@@ -1,4 +1,5 @@
 import Link from "next/link";
+import LogoutDashboard from "../_components/Sidebar";
 
 const links = [
   { href: "/tenant-dashboard", label: "Overview" },
@@ -31,6 +32,8 @@ export default function TenantDashboardLayout({
             </Link>
           ))}
         </nav>
+        <hr />
+        <LogoutDashboard />
       </aside>
       <main className="flex-1 px-4">{children}</main>
     </div>
