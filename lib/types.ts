@@ -63,6 +63,7 @@ export interface Property {
   title: string;
   description: string;
   price: number;
+  sizeSqFt: number;
   location: string;
   amenities: string[];
   images: string[];
