@@ -1,5 +1,6 @@
 import Link from "next/link";
 import LogoutDashboard from "../_components/Sidebar";
+import { Home } from "lucide-react";
 
 const links = [
   { href: "/landlord-dashboard", label: "Overview" },
@@ -21,6 +22,12 @@ export default function LandlordDashboardLayout({
             RentNest -LANDLORD
           </h2>
         </div>
+        <Link
+          className="text-emerald-700 font-bold flex justify-start items-center gap-3 my-2.5"
+          href="/"
+        >
+          <Home size={14} /> Back
+        </Link>
         <nav className="flex flex-col gap-1">
           {links.map((l) => (
             <Link
