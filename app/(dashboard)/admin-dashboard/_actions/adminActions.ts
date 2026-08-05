@@ -8,7 +8,6 @@ export async function getAdminStats() {
   const result = await apiFetch<{ data: AdminStats }>("/admin/stats", {
     method: "GET",
   });
-  console.log("admin stats: ", result.data);
   return result.data;
 }
 

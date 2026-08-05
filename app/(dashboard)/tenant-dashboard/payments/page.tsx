@@ -2,7 +2,6 @@ import { getMyPayments } from "../_actions/paymentActions";
 
 export default async function TenantPaymentsPage() {
   const payments = await getMyPayments();
-  console.log(payments);
 
   return (
     <div>

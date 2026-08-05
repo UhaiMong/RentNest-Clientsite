@@ -11,7 +11,6 @@ import PropertyMotionWrapper from "./_components/PropertyMotionWrapper";
 
 export default async function CreatePropertyPage() {
   const categories = await getCategories();
-  console.log("categories:", categories);
   return (
     <div>
       <h1 className="mb-6 text-2xl font-semibold">Add Property</h1>

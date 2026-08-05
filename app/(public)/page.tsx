@@ -5,12 +5,11 @@ import { Button } from "@/components/ui/button";
 import { getProperties } from "../services/property-action";
 import { Property } from "@/lib/types";
 
-export default async function HomePage() {
+export default async function PublicHome() {
   const data = await getProperties({ limit: "4", page: "1" });
   const properties: Property[] = Array.isArray(data)
     ? data
     : ((data as { data?: Property[] })?.data ?? []);
-  console.log(properties);
 
   return (
     <div>
